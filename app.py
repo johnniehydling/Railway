@@ -1,4 +1,5 @@
 from flask import Flask, Response
+import os
 
 app = Flask(__name__)
 
@@ -9,14 +10,7 @@ def answer():
         <Play digits="5"/>
     </Response>'''
     return Response(xml, mimetype='text/xml')
-```
 
-**`requirements.txt`**
-```
-flask
-gunicorn
-```
-
-**`Procfile`**
-```
-web: gunicorn app:app
+if __name__ == '__main__':
+    port = int(os.environ.get('PORT', 5000))
+    app.run(host='0.0.0.0', port=port)
