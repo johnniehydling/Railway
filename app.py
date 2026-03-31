@@ -1,4 +1,4 @@
-from flask import Flask, Response
+from flask import Flask, Response, jsonify
 import os
 
 app = Flask(__name__)
@@ -9,11 +9,13 @@ def health():
 
 @app.route('/answer', methods=['POST'])
 def answer():
-    xml = '''<?xml version="1.0" encoding="UTF-8"?>
-    <Response>
-        <Play digits="5"/>
-    </Response>'''
-    return Response(xml, mimetype='text/xml')
+    response = {
+        "connect": {
+            "to": "dtmf",
+            "dtmf": "5"
+        }
+    }
+    return jsonify(response)
 
 if __name__ == '__main__':
     port = int(os.environ.get('PORT', 8080))
