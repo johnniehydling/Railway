@@ -10,10 +10,7 @@ def health():
 @app.route('/answer', methods=['POST'])
 def answer():
     response = {
-        "connect": {
-            "to": "dtmf",
-            "dtmf": "5"
-        }
+        "play": "sound/dtmf/5"
     }
     return jsonify(response)
 
